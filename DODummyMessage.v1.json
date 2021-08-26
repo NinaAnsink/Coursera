@@ -1,0 +1,340 @@
+{
+  "RequestId": "3 Dummy DO File v1",
+  "IsSuccess": true,
+  "StatusCode": "0",
+  "IncomingTimeStamp": "2020-10-06 15:46:58.025",
+  "OutgoingTimeStamp": "2020-10-06 15:46:59.434",
+  "Duration": "1409",
+  "CustomerId": "C2045_813002",
+  "LogEntryDate": "2020-10-06",
+  "SyncMessageEntryTypeSynchCode": "DO",
+  "RequestJson": {
+    "customer_id": "C2045_813002",
+    "delivery_address": {
+      "address_type": "PRIMARY",
+      "address": "DummyStreet 4",
+      "postal_code": "4640DE",
+      "city": "DummyCity",
+      "country_code": "DK",
+      "address_id": "CA0000_0704390"
+    },
+    "item_lines": [
+      {
+        "line_id": "1",
+        "item_id": "00003503503E",
+        "quantity": 1.123,
+        "delivery_option": "D17"
+      }
+    ]
+  },
+  "ResponseJson": {
+    "item_lines": [
+      {
+        "line_id": "1",
+        "delivery_options": [
+          "D17",
+          "S17"
+        ]
+      }
+    ],
+	"code": 400,
+        "status": "ERR",
+        "message": "Bad Request",
+        "errors": [
+          {
+            "code": "40042",
+            "message": "Customer number invalid."
+          }
+        ]
+  },
+  "SyncMessageFlowStructs": [
+    {
+      "FlowStartTime": "2020-10-06 15:46:58.421",
+      "LoggingFlowTypeSyncCode": "DO",
+      "SyncMessageFlowStepStructs": [
+        {
+          "IsWarning": true,
+          "StepNumber": 1,
+          "StepSyncCode": "DA",
+          "StepName": "Validate Delivery Address",
+          "IncomingTime": "2020-10-06 15:46:58.452",
+          "OutgoingTime": "2020-10-06 15:46:58.730",
+          "Duration": "278",
+          "StepMessage": "Address could not be found with given AddressId 'CA0000_0704390', taking address from request if available. Night Delivery is NOT possible.",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "DA",
+            "ResultSetJson": {
+              "Address": {
+                "address": "SomeStreet 4",
+                "postal_code": "4640DE",
+                "city": "SomeCity",
+                "country_code": "DK",
+                "address_id": "CA0000_0704390"
+              },
+              "ResultJSONString": "{address_id:,address:Joensuuntie 1,postal_code:AT-AQ-1,city:Ruovesi,country_code:AQ,IsNightDeliveryFlag:false,DefaultDeliveryMethod:,name:,external_id:,address_type:CUSTOM}",
+              "Item_lines": [
+                {
+                  "line_id": "1",
+                  "item_id": "00003503503E",
+                  "quantity": 1.123
+                }
+              ]
+            }
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 2,
+          "StepSyncCode": "IL",
+          "StepName": "Validate Line Items",
+          "IncomingTime": "2020-10-06 15:46:58.761",
+          "OutgoingTime": "2020-10-06 15:46:58.777",
+          "Duration": "16",
+          "StepMessage": "Nordics Only - no line items validation(s) to be done thus return success.",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "IL",
+            "ResultSetJson": {
+              "Item_lines": [
+                {
+                  "line_id": "1",
+                  "item_id": "00003503503",
+                  "quantity": 1.123
+                }
+              ],
+              "ResultJSONString": "[{line_id:1,item_id:100100,quantity:1.0}]"
+            }
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 3,
+          "StepSyncCode": "CC",
+          "StepName": "Validate Country Code",
+          "IncomingTime": "2020-10-06 15:46:58.777",
+          "OutgoingTime": "2020-10-06 15:46:58.870",
+          "Duration": "93",
+          "StepMessage": "Country Denmark found for ISO code 'DK'",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "CC",
+            "ResultSetJson": {
+              "CountryInfo": {
+                "ISO": "DK",
+                "Country": "Denmark"
+              },
+              "ResultJSONString": "{ISO:AQ,ISO3:,ISONumeric:,Fips:,Country:Antarctica,Capital:,Continent:AN,GeoNameId:0}"
+            }
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 4,
+          "StepSyncCode": "PC",
+          "StepName": "Validate Postal Code",
+          "IncomingTime": "2020-10-06 15:46:58.870",
+          "OutgoingTime": "2020-10-06 15:46:58.933",
+          "Duration": "63",
+          "StepMessage": "1 code(s) found for 4640 in country DK",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "2",
+            "ResultSetJson": {
+              "PostalCodes": [
+                {
+                  "Id": 537313,
+                  "CountryCode": "DK",
+                  "PostalCode": "4640DE",
+                  "PlaceName": "Faxe",
+                  "AdminName1": "Region Sjælland",
+                  "AdminCode1": "85E",
+                  "AdminName2": "Faxe Kommune",
+                  "AdminCode2": "320E",
+                  "Latitude": 121176.0,
+                  "Longitude": 552469.0,
+                  "Accuracy": 4
+                }
+              ],
+              "ResultJSONString": "[{Id:1067037,CountryCode:AQ,PostalCode:AT-AQ-1,PlaceName:AT-AQ-City-1,AdminName1:,AdminCode1:,Latitude:0.0,Longitude:0.0}]"
+            }
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 5,
+          "StepSyncCode": "DW",
+          "StepName": "Validate Customer Default Warehouse",
+          "IncomingTime": "2020-10-06 15:46:58.933",
+          "OutgoingTime": "2020-10-06 15:46:59.012",
+          "Duration": "79",
+          "StepMessage": "1 customer(s) found for 'C2045_813002'",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "DW",
+            "ResultSetJson": {
+              "Customer": {
+                "CustomerId": "117166",
+                "UniqueCustomerId": "C2045_813002",
+                "Name": "Poul Erik Pedersen",
+                "DefaultWarehouseId": "WH2045_100"
+              },
+              "ResultJSONString": "[{CustomerId:51733,UniqueCustomerId:C2045_30470,Name:Herborg Smede & Maskinforretning A/S,DefaultWarehouseId:WH2045_100,IndustryId:43}]"
+            }
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 6,
+          "StepSyncCode": "PI",
+          "StepName": "Validate Pickup Information",
+          "IncomingTime": "2020-10-06 15:46:59.012",
+          "OutgoingTime": "2020-10-06 15:46:59.028",
+          "Duration": "16",
+          "StepMessage": "No default delivery method found for customer address.",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "PI",
+	    "ResultSetJson": {
+		"ResultJSONString": "[]"
+	    }	
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 7,
+          "StepSyncCode": "ZO",
+          "StepName": "Validate/Retrieve Zones",
+          "IncomingTime": "2020-10-06 15:46:59.028",
+          "OutgoingTime": "2020-10-06 15:46:59.122",
+          "Duration": "94",
+          "StepMessage": "1 zones found for the relevant postal code.",
+          "SyncMessageFlowStepResultStruct": {
+            "ResultSetJson": {
+              "Zones": [
+                {
+    	  	  "ZoneId": "2865",
+                  "ZoneName": "DK_EAST",
+                  "CountryInfoId": "DK"
+                }
+              ],
+              "ResultJSONString": "[{ZoneId:2865,ZoneName:DK_WEST,CountryInfoId:DK}]"
+            }
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 8,
+          "StepSyncCode": "TL",
+          "StepName": "Validate/Retrieve Transitlanes",
+          "IncomingTime": "2020-10-06 15:46:59.137",
+          "OutgoingTime": "2020-10-06 15:46:59.215",
+          "Duration": "78",
+          "StepMessage": "3 transitlanes found.",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "TL",
+            "ResultSetJson": {
+              "TransitLanes": [
+                {
+                  "Id": 42506,
+                  "Origin": "WH2045_100 - Warehouse Skjern (PRD)",
+                  "Destination": "DK_EAST",
+                  "CarrierCode": "ERIK",
+                  "CarrierLabel": "ERIK - ERIK (Test)",
+                  "CarrierServiceCodeLabel": " - ",
+                  "ModeOfTransportationCode": "DFLT",
+                  "ModeOfTransportationLabel": "DFLT - Default Mode Of Transportation",
+                  "EffectiveDate": "2020-08-13",
+                  "ExpirationDate": "2049-12-31",
+                  "DeliveryOptionLabel": "D17 - Day delivery business hours (PRD)",
+                  "DeliveryOptionCode": "D17",
+                  "DestinationType": "Zone",
+                  "ErpDeliveryMethodLabel": " - ",
+		  "ErpDeliveryMethodCode": "EXP1"
+                },
+                {
+                  "Id": 42502,
+                  "Origin": "WH2045_100 - Warehouse Skjern (PRD)",
+                  "Destination": "DK (DK)",
+                  "CarrierCode": "DFLT",
+                  "CarrierLabel": "DFLT - Default (PRD)",
+                  "CarrierServiceCodeLabel": " - ",
+                  "ModeOfTransportationCode": "DFLT",
+                  "ModeOfTransportationLabel": "DFLT - Default Mode Of Transportation",
+                  "EffectiveDate": "2020-08-12",
+                  "ExpirationDate": "2049-12-31",
+                  "DeliveryOptionLabel": "S17 - Same day delivery business hours (PRD)",
+                  "DeliveryOptionCode": "S17",
+                  "DestinationType": "Country",
+                  "ErpDeliveryMethodLabel": " - ",
+                  "ErpDeliveryMethodCode": "13"
+                },
+                {
+                  "Id": 42504,
+                  "Origin": "WH2045_100 - Warehouse Skjern (PRD)",
+                  "Destination": "DK (DK)",
+                  "CarrierCode": "DFLT",
+                  "CarrierLabel": "DFLT - Default (PRD)",
+                  "CarrierServiceCodeLabel": " - ",
+                  "ModeOfTransportationCode": "DFLT",
+                  "ModeOfTransportationLabel": "DFLT - Default Mode Of Transportation",
+                  "EffectiveDate": "2020-08-14",
+                  "ExpirationDate": "2049-12-31",
+                  "DeliveryOptionLabel": "D17 - Day delivery business hours (PRD)",
+                  "DeliveryOptionCode": "D17",
+                  "DestinationType": "Country",
+                  "ErpDeliveryMethodLabel": " - "
+                }
+              ],
+              "ResultJSONString": "[{Id:42703,Origin:WH2045_100 - Warehouse Skjern (PRD),Destination:DK_WEST,CarrierId:1358,CarrierCode:DFLT,CarrierLabel:DFLT - Default (PRD),CarrierServiceCodeName: - ,ModeOfTransportationId:850,ModeOfTransportationCode:DFLT,ModeOfTransportationLabel:DFLT - Default Mode Of Transportation,EffectiveDate:2021-03-17,ExpirationDate:2049-12-31,DeliveryOptionId:999,DeliveryOptionLabel:D17 - Day delivery business hours (PRD),DeliveryOptionCode:D17,DestinationType:Zone,ErpDeliveryMethodLabel:06 - DK Day (PRD),ErpDeliveryMethodCode:06},{Id:42705,Origin:WH2045_100 - Warehouse Skjern (PRD),Destination:DK_WEST,CarrierId:1358,CarrierCode:DFLT,CarrierLabel:DFLT - Default (PRD),CarrierServiceCodeName: - ,ModeOfTransportationId:850,ModeOfTransportationCode:DFLT,ModeOfTransportationLabel:DFLT - Default Mode Of Transportation,EffectiveDate:2021-03-17,ExpirationDate:2049-12-31,DeliveryOptionId:1025,DeliveryOptionLabel:PW - Pick Up Customers,DeliveryOptionCode:PW,DestinationType:Zone,ErpDeliveryMethodLabel:13 - Afhentes,ErpDeliveryMethodCode:13},{Id:43472,Origin:WH2045_100 - Warehouse Skjern (PRD),Destination:DK (DK),CarrierId:1358,CarrierCode:DFLT,CarrierLabel:DFLT - Default (PRD),CarrierServiceCodeName: - ,ModeOfTransportationId:850,ModeOfTransportationCode:DFLT,ModeOfTransportationLabel:DFLT - Default Mode Of Transportation,EffectiveDate:2021-05-26,ExpirationDate:2049-12-31,DeliveryOptionId:999,DeliveryOptionLabel:D17 - Day delivery business hours (PRD),DeliveryOptionCode:D17,DestinationType:Country,ErpDeliveryMethodLabel: - },{Id:43478,Origin:WH2045_100 - Warehouse Skjern (PRD),Destination:DK (DK),CarrierId:1358,CarrierCode:DFLT,CarrierLabel:DFLT - Default (PRD),CarrierServiceCodeId:12,CarrierServiceCodeCode:01,CarrierServiceCodeName:01 - Carrier Service Code 1,ModeOfTransportationId:850,ModeOfTransportationCode:DFLT,ModeOfTransportationLabel:DFLT - Default Mode Of Transportation,EffectiveDate:2021-05-27,ExpirationDate:2049-12-31,DeliveryOptionId:1661,DeliveryOptionLabel:DEV - DEV,DeliveryOptionCode:DEV,DestinationType:Country,ErpDeliveryMethodLabel:13 - Afhentes,ErpDeliveryMethodCode:13},{Id:43536,Origin:WH2045_100 - Warehouse Skjern (PRD),Destination:DK (DK),CarrierId:2062,CarrierCode:ATC1,CarrierLabel:ATC1 - ATC1,CarrierServiceCodeName: - ,ModeOfTransportationId:850,ModeOfTransportationCode:DFLT,ModeOfTransportationLabel:DFLT - Default Mode Of Transportation,EffectiveDate:2021-06-16,ExpirationDate:2049-12-31,DeliveryOptionId:1715,DeliveryOptionLabel:ATD1 - ATD1,DeliveryOptionCode:ATD1,DestinationType:Country,ErpDeliveryMethodLabel: - }]"
+            }
+          }
+        },
+        {
+          "IsError": true,
+          "StepNumber": 9,
+          "StepSyncCode": "DO",
+          "StepName": "Extract Delivery Options",
+          "IncomingTime": "2020-10-06 15:46:59.231",
+          "OutgoingTime": "2020-10-06 15:46:59.247",
+          "Duration": "16",
+          "StepMessage": "2 delivery options retrieved.",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "DO",
+	    "ResultSetJson": {
+              "DeliveryOptions": [
+                {
+                  "Label": "D17 - Day delivery business hours (PRD)",
+                  "Code": "D17"
+                },
+                {
+                  "Label": "PW - Pick Up Customers",
+                  "Code": "PW"
+                },
+                {
+                  "Label": "DEV - DEV",
+                  "Code": "DEV"
+                },
+                {
+                  "Label": "ATD1 - ATD1",
+                  "Code": "ATD1"
+                }
+	      ],
+              "ResultJSONString": "[{Label:D17 - Day delivery business hours (PRD),Code:D17},{Label:PW - Pick Up Customers,Code:PW},{Label:DEV - DEV,Code:DEV},{Label:ATD1 - ATD1,Code:ATD1}]"
+            }
+          }
+        },
+        {
+          "IsSuccess": true,
+          "StepNumber": 10,
+          "StepSyncCode": "ICR",
+          "StepName": "Filter Delivery Options on Carrier Restrictions",
+          "IncomingTime": "2021-08-03 08:38:29.252",
+          "OutgoingTime": "2021-08-03 08:38:29.283",
+          "Duration": "31",
+          "StepMessage": "1 items validated for Carrier restrictions.",
+          "SyncMessageFlowStepResultStruct": {
+            "SyncMessageLogEntryTypeSyncCode": "ICR",
+            "ResultSetJson": {
+              "ResultJSONString": "[{CarrierCode:ATC1,DeliveryOption:ATD1,ModeOfTransportation:DFLT,CarDoMot_Label:ATC1 + ATD1 + DFLT,AllOptions_Items:[{IsSuccess:true}]}]"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
